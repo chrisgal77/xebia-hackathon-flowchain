@@ -63,7 +63,7 @@ class EmbeddingWriter:
 
 if __name__ == "__main__":
     writer = EmbeddingWriter()
-    writer.write("Krzychu")
+    writer.write("Krzychu_v2")
     writer.save()
 
         
