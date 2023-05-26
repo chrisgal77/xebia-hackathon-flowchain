@@ -1,6 +1,11 @@
 <template>
     <div class="Popup">
-        JESTEM POPUPEPM XDDDDDDD
+      <b-table
+        striped
+        hover
+        :items="items"
+        :fields="fields"
+      />
     </div>
   </template>
   
@@ -10,6 +15,31 @@
     props: {
       msg: String
     },
+    data() {
+      return {
+        fields: [
+          {
+            key: 'datetime',
+            label: 'Event Time'
+          },
+          {
+            key: 'cctv_img',
+            label: 'Surveilance Photo'
+          },
+          {
+            key: 'person_photo',
+            label: 'Person Found',
+          },
+          {
+            key: 'metadata',
+            label: 'Additional info'
+          }
+        ],
+        items: [
+        ]
+      }
+    },
+
   }
   </script>
   
