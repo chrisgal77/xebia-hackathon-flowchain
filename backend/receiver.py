@@ -1,6 +1,8 @@
 import cv2
 import insightface
 import os
+from typing import Protocol
+import numpy as np
 
 
 class ConnectionError(Exception):
@@ -10,6 +12,17 @@ class ConnectionError(Exception):
 AWS_STREAM_URL = os.getenv("AWS_STREAM_URL", None)
 if not AWS_STREAM_URL:
     raise ConnectionError()
+
+
+class PersonSelector(Protocol):
+
+    threshold: float
+
+    def compare(self, faces: np.ndarray) -> tuple[list[list[str], list[int]]]:
+        pass
+
+
+selector = PersonSelector(threshold = 0.5)
 
 
 model = insightface.app.FaceAnalysis()
@@ -29,15 +42,21 @@ def display_streamed_video(url):
 
         faces = model.get(image_rgb)
 
-        for face in faces:
-            bbox = face.bbox.astype(int)
-            cv2.rectangle(image, (bbox[0], bbox[1]), (bbox[2], bbox[3]), (0, 255, 0), 2)
+        face_images = np.stack([face.embedding for face in faces])
+
+        names, indices = selector.compare(faces=face_images)
+        
+        for idx, face in enumerate(faces):
+            
+            if idx in indices:
+                bbox = face.bbox.astype(int)
+                cv2.rectangle(image, (bbox[0], bbox[1]), (bbox[2], bbox[3]), (0, 255, 0), 2)
 
         cv2.imshow('MediaPipe Face Detection', cv2.flip(image, 1))
         if cv2.waitKey(5) & 0xFF == 27:
             break
     cap.release()
     cv2.destroyAllWindows()
-
+ 
 if __name__ == "__main__":
     display_streamed_video(AWS_STREAM_URL)
