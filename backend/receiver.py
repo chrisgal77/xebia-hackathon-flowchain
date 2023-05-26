@@ -3,6 +3,7 @@ import insightface
 import os
 from typing import Protocol
 import numpy as np
+from backend.person_base import EmbeddingSelector
 
 
 class ConnectionError(Exception):
@@ -20,7 +21,7 @@ class PersonSelector(Protocol):
         pass
 
 try:
-    selector = PersonSelector(threshold = 0.5)
+    selector = EmbeddingSelector(threshold = 0.5)
 except ValueError:
     selector = None
 
@@ -45,12 +46,10 @@ def display_streamed_video(url):
         face_images = np.stack([face.embedding for face in faces])
 
         names, indices = selector.compare(faces=face_images) if selector else ([], [])
-        
         for idx, face in enumerate(faces):
             if idx in indices:
                 bbox = face.bbox.astype(int)
                 cv2.rectangle(image, (bbox[0], bbox[1]), (bbox[2], bbox[3]), (0, 255, 0), 2)
-
         cv2.imshow('MediaPipe Face Detection', cv2.flip(image, 1))
         if cv2.waitKey(5) & 0xFF == 27:
             break

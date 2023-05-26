@@ -1,17 +1,17 @@
 import numpy as np
 from pathlib import Path
 
-DATABASE_PATH = Path.cwd().parent / "xebia-hackathon-flowchain/backend/database"
+DATABASE_PATH = Path.cwd().parent / "database"
 
-class PersonSelector():
+class EmbeddingSelector():
 
     threshold: float
     database: np.ndarray
 
-    def __init__(self, treshold: float):
+    def __init__(self, threshold: float):
         
-        self.threshold = treshold
-        self.database_path = DATABASE_PATH / "dummy_face_data.npy"
+        self.threshold = threshold
+        self.database_path = DATABASE_PATH / "embedding_base.npy"
         self.person_base = DATABASE_PATH / "person_base.txt"
 
         try:
@@ -26,11 +26,6 @@ class PersonSelector():
             raise ValueError()
 
     def compare(self, faces: np.ndarray) -> tuple[list[list[str], list[int]]]:
-        
-        print(self.database.shape)
-        print(faces.shape)
-        print(self.persons)
-
         persons_indices = []
         faces_indices = []
 
@@ -45,14 +40,14 @@ class PersonSelector():
                 faces_indices.append(person_idx)
                 persons_indices.append(self.persons[person_idx])
         
-        return faces_indices, persons_indices
+        return persons_indices, faces_indices
         
         
 
 
 if __name__ == "__main__":
 
-    selector = PersonSelector(0.5)
+    selector = EmbeddingSelector(0.5)
 
     #incoming_faces = np.random.rand(3, 512)
     incoming_faces = [
