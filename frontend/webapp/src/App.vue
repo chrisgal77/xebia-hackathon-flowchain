@@ -6,12 +6,6 @@
       <b-container
         class="bv-example-row"
       >
-      <!-- <b-table
-        striped
-        hover
-        :items="items"
-        :fields="fields"
-      /> -->
       <b-card>
         <b-container class="bv-example-row">
           <b-row>
@@ -27,41 +21,22 @@
           <b-container class="bv-example-row">
             <b-row>
               <b-col>{{ item.datetime }}</b-col>
-              <b-col><b-img :src="item.cctv_img" fluid alt="cctv_image" height="100"></b-img></b-col>
-              <b-col><b-img :src="item.person_photo" fluid alt="person_image" height="100"></b-img></b-col>
-              <b-col>{{ item.metadata }} <p><b-button v-b-modal.modal-2 class="btn btn-success">Więcej informacji</b-button></p></b-col>
+              <b-col>
+                <b-img :src="item.cctv_img" fluid alt="cctv_image" height="100"></b-img>
+                <p><b-button v-b-modal.modal-2 class="btn btn-success">Powiększ</b-button></p>
+              </b-col>
+              <b-col>
+                <b-img :src="item.person_photo" fluid alt="person_image" height="100"></b-img>
+                <p><b-button v-b-modal.modal-2 class="btn btn-success">Powiększ</b-button></p>
+              </b-col>
+              <b-col>{{ item.metadata }}</b-col>
             </b-row>
           </b-container>
         </b-card>
       </div>
-        <!-- <b-row>
-          <b-col cols="1"/>
-          <b-col
-            cols="10"
-          >
-            <b-card
-              title="Podgląd"
-              :img-src='url'
-              img-top
-              tag="article"
-              style="max-width: 20rem;"
-              class="mt-0"
-            >
-              <b-card-text>
-                Wideo przedstawia działające detektory
-              </b-card-text>
-
-            </b-card>
-          </b-col>
-          <b-col cols="1"/>
-        </b-row> -->
       </b-container>
     </div>
-
-    <!-- <div class="position-absolute bottom-0 start-50 translate-middle">
-      <b-button v-b-modal.modal-2 class="btn btn-success">POPAAAAAP</b-button>
-    </div> -->
-    <b-modal id="modal-2" title="Popup">
+    <b-modal id="modal-2" title="Powiększone zdjęcie" size="xl">
       <p class="my-4"><Popup/></p>
     </b-modal>
   </div>

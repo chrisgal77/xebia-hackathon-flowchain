@@ -1,11 +1,6 @@
 <template>
     <div class="Popup">
-      <b-table
-        striped
-        hover
-        :items="items"
-        :fields="fields"
-      />
+      <b-img src="https://picsum.photos/1024/400/?image=41" fluid alt="Responsive image"></b-img>
     </div>
   </template>
   
@@ -16,28 +11,7 @@
       msg: String
     },
     data() {
-      return {
-        fields: [
-          {
-            key: 'datetime',
-            label: 'Event Time'
-          },
-          {
-            key: 'cctv_img',
-            label: 'Surveilance Photo'
-          },
-          {
-            key: 'person_photo',
-            label: 'Person Found',
-          },
-          {
-            key: 'metadata',
-            label: 'Additional info'
-          }
-        ],
-        items: [
-        ]
-      }
+      return {}
     },
 
   }
