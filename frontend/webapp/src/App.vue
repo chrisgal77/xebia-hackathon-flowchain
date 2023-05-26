@@ -1,5 +1,27 @@
 <template>
   <div>
+    <b-navbar toggleable="lg" type="dark" variant="primary">
+      <img src="./assets/EyeCityLogo.png" fluid/>
+      <b-navbar-brand href="#">EyeCity</b-navbar-brand>
+
+      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+      <b-collapse id="nav-collapse" is-nav>
+        <b-navbar-nav>
+          <b-button right v-b-toggle.sidebar-1 variant="danger">Press me!</b-button>
+        </b-navbar-nav>
+      </b-collapse>
+    </b-navbar>
+    <b-sidebar id="sidebar-1" title="Poszukiwany" shadow>
+      <div class="px-3 py-2">
+        <p>
+          Żywy bądź martwy (choć lepiej żywy) Krzysiek. Zaginął po poznaniu pewnej damy.
+          Teraz już nie ma czasu na swoich kolegów. Krzysiek wróć, tęsknimy!
+          Dla znalazcy 5zł i paczka Cheetosów serowych.
+        </p>
+        <img src="./assets/Gal_wanted.png" fluid thumbnail />
+      </div>
+    </b-sidebar>
     <div class="mt-2">
     </div>
     <div class="mt-2">
