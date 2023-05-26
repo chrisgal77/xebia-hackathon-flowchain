@@ -17,17 +17,17 @@
         </b-container>
       </b-card>
       <div v-for="(item, index) in items" v-bind:key="index">
-        <b-card @click="v-b-modal.modal-2">
+        <b-card>
           <b-container class="bv-example-row">
             <b-row>
               <b-col>{{ item.datetime }}</b-col>
               <b-col>
                 <b-img :src="item.cctv_img" fluid alt="cctv_image" height="100"></b-img>
-                <p><b-button v-b-modal.modal-2 class="btn btn-success">Powiększ</b-button></p>
+                <p><b-button v-b-modal.modal-2 class="btn btn-success" @click="setImage(item.cctv_img)">Powiększ</b-button></p>
               </b-col>
               <b-col>
                 <b-img :src="item.person_photo" fluid alt="person_image" height="100"></b-img>
-                <p><b-button v-b-modal.modal-2 class="btn btn-success">Powiększ</b-button></p>
+                <p><b-button v-b-modal.modal-2 class="btn btn-success" @click="setImage(item.person_photo)">Powiększ</b-button></p>
               </b-col>
               <b-col>{{ item.metadata }}</b-col>
             </b-row>
@@ -36,21 +36,24 @@
       </div>
       </b-container>
     </div>
-    <b-modal id="modal-2" title="Powiększone zdjęcie" size="xl">
-      <p class="my-4"><Popup/></p>
+    <b-modal id="modal-2" title="Powiększone zdjęcie" size="xl" :image="image" ok-only ok-title="Close me">
+      <template>
+        <div class="Popup">
+          <b-img :src="image" fluid alt="Responsive image"></b-img>
+        </div>
+      </template>
     </b-modal>
   </div>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
-import Popup from './components/ModalPopup.vue'
 
 
 export default {
   name: 'App',
   data() {
     return{
+      image: '',
       url: 'http://localhost:5000/video',
       video: false,
       color: '#BA91FF',
@@ -79,10 +82,15 @@ export default {
     }
   },
   components: {
-    Popup
   },
+
   created() {
-  document.body.style.backgroundColor = '#BA91FF'
+  document.body.style.backgroundColor = '#4006A0'
+  },
+  methods: {
+    setImage (img) {
+      this.image = img
+    }
   }
 }
 

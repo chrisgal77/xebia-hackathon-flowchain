@@ -1,19 +1,15 @@
 <template>
-    <div class="Popup">
-      <b-img src="https://picsum.photos/1024/400/?image=41" fluid alt="Responsive image"></b-img>
-    </div>
-  </template>
+  <div class="Popup">
+    <b-img :src="image" fluid alt="Responsive image"></b-img>
+  </div>
+</template>
   
   <script>
   export default {
     name: 'PopupModal',
     props: {
-      msg: String
+      image: String
     },
-    data() {
-      return {}
-    },
-
   }
   </script>
   
