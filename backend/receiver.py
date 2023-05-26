@@ -15,14 +15,14 @@ if not AWS_STREAM_URL:
 
 
 class PersonSelector(Protocol):
-
     threshold: float
-
     def compare(self, faces: np.ndarray) -> tuple[list[list[str], list[int]]]:
         pass
 
-
-selector = PersonSelector(threshold = 0.5)
+try:
+    selector = PersonSelector(threshold = 0.5)
+except ValueError:
+    selector = None
 
 
 model = insightface.app.FaceAnalysis()
@@ -44,10 +44,9 @@ def display_streamed_video(url):
 
         face_images = np.stack([face.embedding for face in faces])
 
-        names, indices = selector.compare(faces=face_images)
+        names, indices = selector.compare(faces=face_images) if selector else ([], [])
         
         for idx, face in enumerate(faces):
-            
             if idx in indices:
                 bbox = face.bbox.astype(int)
                 cv2.rectangle(image, (bbox[0], bbox[1]), (bbox[2], bbox[3]), (0, 255, 0), 2)
