@@ -9,6 +9,7 @@
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
           <b-button right v-b-toggle.sidebar-1 variant="danger">Press me!</b-button>
+          <b-button v-b-modal.modal-stream class="btn btn-warning">Stream</b-button>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
@@ -45,11 +46,11 @@
               <b-col>{{ item.datetime }}</b-col>
               <b-col>
                 <b-img :src="item.cctv_img" fluid alt="cctv_image" height="100"></b-img>
-                <p><b-button v-b-modal.modal-2 class="btn btn-success" @click="setImage(item.cctv_img)">Powiększ</b-button></p>
+                <p><b-button v-b-modal.modal-image class="btn btn-success" @click="setImage(item.cctv_img)">Powiększ</b-button></p>
               </b-col>
               <b-col>
                 <b-img :src="item.person_photo" fluid alt="person_image" height="100"></b-img>
-                <p><b-button v-b-modal.modal-2 class="btn btn-success" @click="setImage(item.person_photo)">Powiększ</b-button></p>
+                <p><b-button v-b-modal.modal-image class="btn btn-success" @click="setImage(item.person_photo)">Powiększ</b-button></p>
               </b-col>
               <b-col>{{ item.metadata }}</b-col>
             </b-row>
@@ -58,18 +59,22 @@
       </div>
       </b-container>
     </div>
-    <b-modal id="modal-2" title="Powiększone zdjęcie" size="xl" :image="image" ok-only ok-title="Close me">
+    <b-modal id="modal-image" title="Powiększone zdjęcie" size="xl" :image="image" ok-only ok-title="Close me">
       <template>
         <div class="Popup">
           <b-img :src="image" fluid alt="Responsive image"></b-img>
         </div>
       </template>
     </b-modal>
+    <b-modal id="modal-stream" title="Stream na żywo z kamery" size="xl" ok-only ok-title="Close me">
+      <p class="my-4"><Stream/></p>
+    </b-modal>
   </div>
 </template>
 
 <script>
 
+import Stream from './components/ModalPopup.vue'
 
 export default {
   name: 'App',
@@ -104,6 +109,7 @@ export default {
     }
   },
   components: {
+    Stream
   },
 
   created() {
