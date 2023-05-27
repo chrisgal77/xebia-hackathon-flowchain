@@ -139,7 +139,7 @@ export default {
     },
     async getImagesData() {
       try {
-        const response = await fetch("http://192.168.2.126:8000/get_images");
+        const response = await fetch("http://localhost:8000/get_images");
         const data = await response.json();
         console.log(data)
         this.items = data;

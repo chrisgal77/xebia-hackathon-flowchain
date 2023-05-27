@@ -1,0 +1,27 @@
+version: '3'
+services:
+  fastapi:
+    build:
+      context: ./aws_data_receiver
+    container_name: fastapi
+    ports:
+      - '8000:8000'
+    command: uvicorn receiver:app --host 0.0.0.0 --port 8000
+    networks:
+      - backend
+
+  vue:
+    build:
+      context: ./frontend
+    container_name: vue
+    ports:
+      - '8080:8080'
+    command: npm run serve
+    depends_on:
+      - fastapi
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
