@@ -53,19 +53,26 @@ def display_streamed_video(url):
             face_images = np.stack([face.embedding for face in faces])
 
             names, indices = selector.compare(faces=face_images) if selector else ([], [])
+            face_arrays = []
             for idx, face in enumerate(faces):
                 bbox = face.bbox.astype(int)
                 if idx in indices:
                     cv2.rectangle(image, (bbox[0], bbox[1]), (bbox[2], bbox[3]), (0, 255, 0), 2)
-                    if time.time() - last_execution > 5:
-                        last_execution = time.time()
+                    try:
+                        face_arrays.append((image[bbox[1]:bbox[3], bbox[0]:bbox[2]], names[idx]))
                         send_alert(image=image, face_image=image[bbox[1]:bbox[3], bbox[0]:bbox[2]], timestamp=datetime.now(), name=names[idx])
+                    except:
+                        pass
                 else:
                     try:
                         blurred = cv2.blur(image[bbox[1]:bbox[3], bbox[0]:bbox[2]], (25, 25))
                         image[bbox[1]:bbox[3], bbox[0]:bbox[2]] = blurred
                     except:
                         continue
+            if time.time() - last_execution > 10:
+                last_execution = time.time()
+                for face_img, name in face_arrays:
+                    send_alert(image=image, face_image=face_img, timestamp=datetime.now(), name=name)
                     
         cv2.imshow('MediaPipe Face Detection', cv2.flip(image, 1))
         if cv2.waitKey(5) & 0xFF == 27:
