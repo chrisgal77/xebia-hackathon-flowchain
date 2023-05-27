@@ -18,25 +18,9 @@
 ## Table of contents
 
 - [Table of contents](#table-of-contents)
-- [What's included](#whats-included)
 - [Creators](#creators)
 - [Copyright and license](#copyright-and-license)
 
-
-## What's included
-
-Some text
-
-```text
-folder1/
-└── folder2/
-    ├── folder3/
-    │   ├── file1
-    │   └── file2
-    └── folder4/
-        ├── file3
-        └── file4
-```
 
 ## Creators
 
