@@ -29,7 +29,7 @@ class EmbeddingSelector():
         persons_indices = []
         faces_indices = []
 
-        for face in faces:
+        for idx, face in enumerate(faces):
             distances = np.dot(self.database, face.T) / (
                 np.linalg.norm(self.database, axis=1) * np.linalg.norm(face)
             )
@@ -37,7 +37,7 @@ class EmbeddingSelector():
             if np.any(distances > self.threshold):
                 person_idx = np.argmax(distances, axis=-1)
                 
-                faces_indices.append(person_idx)
+                faces_indices.append(idx)
                 persons_indices.append(self.persons[person_idx])
         
         return persons_indices, faces_indices
