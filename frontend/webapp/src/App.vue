@@ -8,7 +8,7 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-button right v-b-toggle.sidebar-1 variant="danger" class="mx-1">Press me!</b-button>
+          <b-button right v-b-toggle.sidebar-1 variant="danger" class="mx-1" @click="getImagesData">Press me!</b-button>
           <b-button right v-b-toggle.sidebar-2 variant="info" class="mx-1">Poznaj nas</b-button>
           <b-button v-b-modal.modal-stream variant="warning" class="mx-1">Stream</b-button>
         </b-navbar-nav>
@@ -54,16 +54,16 @@
         <b-card>
           <b-container class="bv-example-row">
             <b-row>
-              <b-col>{{ item.datetime }}</b-col>
+              <b-col>{{ item.timestamp }}</b-col>
               <b-col>
-                <b-img :src="item.cctv_img" fluid alt="cctv_image" height="100"></b-img>
-                <p><b-button v-b-modal.modal-image class="btn btn-success" @click="setImage(item.cctv_img)">Powiększ</b-button></p>
+                <b-img :src="getbaseimage(item.image)" fluid alt="cctv_image" height="100"></b-img>
+                <p><b-button v-b-modal.modal-image class="btn btn-success" @click="setImage(getbaseimage(item.image))">Powiększ</b-button></p>
               </b-col>
               <b-col>
-                <b-img :src="item.person_photo" fluid alt="person_image" height="100"></b-img>
-                <p><b-button v-b-modal.modal-image class="btn btn-success" @click="setImage(item.person_photo)">Powiększ</b-button></p>
+                <b-img :src="getbaseimage(item.face_image)" fluid alt="person_image" height="100"></b-img>
+                <p><b-button v-b-modal.modal-image class="btn btn-success" @click="setImage(getbaseimage(item.face_image))">Powiększ</b-button></p>
               </b-col>
-              <b-col>{{ item.metadata }}</b-col>
+              <b-col>{{ item.name }}</b-col>
             </b-row>
           </b-container>
         </b-card>
@@ -113,10 +113,7 @@ export default {
             label: 'Additional info'
           }
         ],
-        items: [
-          {'datetime': '21:52 26-05-2023', 'cctv_img': 'https://cdn.discordapp.com/attachments/1015019631548825671/1021077756479545375/among_trolls.png', 'person_photo': 'https://cdn.discordapp.com/attachments/1015019631548825671/1021077756479545375/among_trolls.png', 'metadata': 'Amogus Sus, 99%'},
-          {'datetime': '21:52 26-05-2023', 'cctv_img': 'https://cdn.discordapp.com/attachments/1015019631548825671/1021077756479545375/among_trolls.png', 'person_photo': 'https://cdn.discordapp.com/attachments/1015019631548825671/1021077756479545375/among_trolls.png', 'metadata': 'Amogus Sus, 99%'}
-        ]
+        items: []
     }
   },
   components: {
@@ -129,8 +126,23 @@ export default {
   methods: {
     setImage (img) {
       this.image = img
+    },
+    async getImagesData() {
+      try {
+        console.log("asd")
+        const response = await fetch("http://192.168.2.126:8000/get_images");
+        const data = await response.json();
+        console.log(data)
+        this.items = data;
+        console.log("dsa")
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    getbaseimage (base) {
+      return "data:image/png;base64, " + base
     }
-  }
+  },
 }
 
 </script>
