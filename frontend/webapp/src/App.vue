@@ -50,8 +50,18 @@
           </b-row>
         </b-container>
       </b-card>
+      <b-card v-if="items.length === 0">
+        <b-container class="bv-example-row">
+          <b-row>
+            <b-col><b-spinner></b-spinner></b-col>
+            <b-col><b-spinner></b-spinner></b-col>
+            <b-col><b-spinner></b-spinner></b-col>
+            <b-col><b-spinner></b-spinner></b-col>
+          </b-row>
+        </b-container>
+      </b-card>
       <div v-for="(item, index) in items" v-bind:key="index">
-        <b-card>
+        <b-card v-if="item.image !== undefined">
           <b-container class="bv-example-row">
             <b-row>
               <b-col>{{ item.timestamp }}</b-col>
@@ -129,12 +139,10 @@ export default {
     },
     async getImagesData() {
       try {
-        console.log("asd")
         const response = await fetch("http://192.168.2.126:8000/get_images");
         const data = await response.json();
         console.log(data)
         this.items = data;
-        console.log("dsa")
       } catch (error) {
         console.error(error);
       }
