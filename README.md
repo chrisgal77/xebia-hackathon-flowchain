@@ -40,23 +40,23 @@ folder1/
 
 ## Creators
 
-**Patryk Wypych**
+**Patryk Wypych (Team Leader)**
 
 - <https://www.linkedin.com/in/patryk-wypych/>
 
-**Krzysztof Galus**
+**Krzysztof Galus (Machine Learning Specialist)**
 
 - <https://www.linkedin.com/in/krzysztof-galus/>
 
-**Jakub Olszewski**
+**Jakub Olszewski (Dev-Ops)**
 
 - <https://www.linkedin.com/in/jakub-olszewski-300616211/>
 
-**Jakub Miara**
+**Jakub Miara (Cloud Architect)**
 
 - <https://www.linkedin.com/in/jakub-miara/>
 
-**Michał Nawarecki**
+**Michał Nawarecki (Fullstack Developer)**
 
 - <https://www.linkedin.com/in/micha%C5%82-nawarecki-718402227/>
 
