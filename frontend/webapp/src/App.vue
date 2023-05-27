@@ -8,7 +8,7 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-button right v-b-toggle.sidebar-1 variant="danger" class="mx-1" @click="getImagesData">Press me!</b-button>
+          <b-button right v-b-toggle.sidebar-1 variant="danger" class="mx-1">Press me!</b-button>
           <b-button right v-b-toggle.sidebar-2 variant="info" class="mx-1">Poznaj nas</b-button>
           <b-button v-b-modal.modal-stream variant="warning" class="mx-1">Stream</b-button>
         </b-navbar-nav>
@@ -143,6 +143,9 @@ export default {
       return "data:image/png;base64, " + base
     }
   },
+  mounted() {
+    this.getImagesData()
+  }
 }
 
 </script>
