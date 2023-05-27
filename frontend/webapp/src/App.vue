@@ -1,15 +1,16 @@
 <template>
   <div>
     <b-navbar toggleable="lg" type="dark" variant="primary">
-      <img src="./assets/EyeCityLogo.png" fluid/>
+      <img src="./assets/logo.png" fluid/>
       <b-navbar-brand href="#">EyeCity</b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-button right v-b-toggle.sidebar-1 variant="danger">Press me!</b-button>
-          <b-button v-b-modal.modal-stream class="btn btn-warning">Stream</b-button>
+          <b-button right v-b-toggle.sidebar-1 variant="danger" class="mx-1">Press me!</b-button>
+          <b-button right v-b-toggle.sidebar-2 variant="info" class="mx-1">Poznaj nas</b-button>
+          <b-button v-b-modal.modal-stream variant="warning" class="mx-1">Stream</b-button>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
@@ -21,6 +22,16 @@
           Dla znalazcy 5zł i paczka Cheetosów serowych.
         </p>
         <img src="./assets/Gal_wanted.png" fluid thumbnail />
+      </div>
+    </b-sidebar>
+    <b-sidebar id="sidebar-2" title="Poznaj nas" shadow>
+      <div class="px-3 py-2">
+        <p> Cześć, jesteśmy FlowChain. Jeżeli chcesz nawiązać z nami kontakt, możesz skorzystać z linków poniżej</p>
+        <p><b-button href="https://www.linkedin.com/in/patryk-wypych/" class="btn btn-primary" target="_blank">Patryk Wypych</b-button></p>
+        <p><b-button href="https://www.linkedin.com/in/krzysztof-galus/" class="btn btn-primary" target="_blank">Krzysztof Galus</b-button></p>
+        <p><b-button href="https://www.linkedin.com/in/jakub-olszewski-300616211/" class="btn btn-primary" target="_blank">Jakub Olszewski</b-button></p>
+        <p><b-button href="https://www.linkedin.com/in/jakub-miara/" class="btn btn-primary" target="_blank">Jakub Miara</b-button></p>
+        <p><b-button href="https://www.linkedin.com/in/micha%C5%82-nawarecki-718402227/" class="btn btn-primary" target="_blank">Michał Nawarecki</b-button></p>
       </div>
     </b-sidebar>
     <div class="mt-2">
